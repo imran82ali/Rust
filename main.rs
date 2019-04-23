@@ -1,40 +1,28 @@
-extern crate rand;
-
 use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
 
 fn main() 
-{  //Main start
-
-    println!("Guess the number!");
-
-    let secret_number = rand::thread_rng().gen_range(1,101);
+{   // main start
     loop
-        {// Loop1 start 
-        println!("The secret number is: {}", secret_number);
-
-        println!("Please input your guess.");
-
-        let mut guess = String::new();
-
-        io::stdin().read_line(&mut guess).expect("Failed to read line");
-
-        let guess: u32 = match guess.trim().parse(){  
+    { // Loop start 
+        println!("\n\n Identify Even / Odd Number \n");
+        
+        println!("\n Please input your Number.\n");
+        let mut user_input = String::new() ;
+        io::stdin().read_line(&mut user_input).expect("Failed to read line");
+        let user_input: u32 = match user_input.trim().parse() 
+        { //Let start
             Ok(num) => num,
-            Err(_) => continue,
-            }; 
+            Err(_)  => continue,
+        }; //Let END
 
-        println!("You guessed: {}", guess);
+        if user_input%2==0
+        {
+            println!("\n \n You entered: {} . This is an EVEN number \n ", user_input);
+        } else
+        {
+            println!("\n \n You entered: {} . This is an ODD number \n ", user_input);
+        }
+        break;
+    } // Loop END
 
-        match guess.cmp(&secret_number) 
-        { //match start
-            Ordering::Less    => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal   => { 
-            println!("You win!"); 
-            break;}
-        } //match END
-
-    } // Loop1 END
-} //Main END
+}   // main END
